@@ -3,8 +3,7 @@ using namespace std;
 #define all(x) x.begin(),x.end()
 int main()
 {
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+ 
     long long l, u, n;
     char sorted,unique,seperator;
     cout << "Enter y/n for sorted, y/n for unique, seperator withot space of enter eg:'nn,' \n";
