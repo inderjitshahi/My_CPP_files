@@ -23,7 +23,7 @@ T x;
 cin>>x;
 return x;
 }
-template<class T> using pbds= tree<T, null_type, less<T>, rb_tree_tag,
+template<class T> using pbds= tree<T, null_type, less<T>, rb_tree_tag,  //replace less by less_equal<T> for allowing duplicate.
 tree_order_statistics_node_update>;
 
 int32_t main(){
@@ -38,7 +38,8 @@ s.insert(100);
 s.insert(5);
 s.insert(0);
 cout<<(s.order_of_key(36))<<endl;  //number of items strictly smaller than k.
-cout<<(*s.find_by_order(4));  //k-th element in the set (counting from zero).
+cout<<(*s.find_by_order(4));  //k-th element in the set (counting from zero). returns iterator
+
 
 return 0;
 }
