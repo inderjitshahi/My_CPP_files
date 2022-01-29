@@ -1,3 +1,5 @@
+//This Program is written for generation  of data for using as a test case in various DSA problems etc. or using generated data in ML related Projects
+
 #include <bits/stdc++.h>
 using namespace std;
 #define all(x) x.begin(),x.end()

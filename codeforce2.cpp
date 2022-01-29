@@ -1,30 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define all(x) x.begin(),x.end()
+int gen(){
+    int x;
+    cin>>x;return x;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
        int t;
     cin >> t;
-    vector<int> res;
-    int n,temp;
+    int n,x,y;
     while (t--)
     {
-        cin>>n;
-        int k=0;
-        while(k++<n){cin>>temp;res.push_back(temp);}
-        sort(res.begin(),res.end(),greater<int>());
-        int i=0;
-        int p=0,q=1;
-        while (i<n/2&&p<n)
-        {
-          if(find (res.begin(), res.end(), (res[p]%res[q]))==res.end()){  cout<<res[p]<<" "<<res[q]<<endl;i++;}
-            if(q<n) q++;
-            else {p++;q=p+1;}
+        bool flag=true;
+        cin>>n>>x>>y;
+         vector<int> v1(n);
+         vector<int> v2(n);
+        generate(all(v1),gen);
+        generate(all(v2),gen);
+        for(int i=0;i<n;i++){
+            if(v1[i]+x==v2[i]||v1[i]+y==v2[i]) continue;
+            else {cout<<"NO\n";;flag=false;break;}
         }
-        
-        res.clear();
+      if(flag)  cout<<"YES\n";
       
     }
     return 0;

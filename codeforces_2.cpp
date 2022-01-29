@@ -36,7 +36,3 @@ cout<<b<<endl;
 
 return 0;
 }
-// 3
-// fc
-// aaaa
-// thebrightboiler
