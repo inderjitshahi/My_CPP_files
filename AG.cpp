@@ -6,7 +6,7 @@ int main()
  
     long long l, u, n;
     char sorted,unique,seperator;
-    cout << "Enter y/n for sorted, y/n for unique, seperator withot space of enter eg:'nn,' \n";
+    cout << "Enter y/n for sorted, y/n for unique, seperator without space of enter eg:'nn,' \n";
     long long num;
     cin >> sorted>>unique;
     seperator=cin.get();
