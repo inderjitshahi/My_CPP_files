@@ -18,5 +18,20 @@
     "type_traits": "cpp",
     "iostream": "cpp",
     "cmath": "cpp"
-  }
+  },
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "askForPassword": true,
+      "driver": "MySQL",
+      "name": "first_connection",
+      "database": "first",
+      "username": "root"
+    }
+  ]
 }

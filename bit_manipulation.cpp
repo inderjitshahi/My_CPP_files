@@ -64,14 +64,45 @@ int clearRangeItoJ(int n, int j, int i)
     int mask = a | b;
     return n & mask;
 }
+int power_opti(int a, int n)
+{
+    int ans = 1;
+    while (n)
+    {
+        if ((n & 1))
+        {
+            ans = ans * a;
+        }
+        a = a * a;
+        n = n >> 1;
+    }
+    return ans;
+}
+void all_subset(string s)
+{
+    int n = s.length();
+    for (int i = 1; i < (1 << n); i++)
+    {
+        cout<<i<<". ";
+        int j = 0, k = i;
+        while (k > 0)
+        {
+            if ((k & 1) == 1)
+                cout << s[j];
+            j++;
+            k = k >> 1;
+        }
+        cout <<"\t";
+    }
+}
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // int n=gen<int>();
     uint32_t n = 1;
-    cout << getBit(n, 32) << endl; // clearing last two bits 1111  ->1100 i.e. 15 to 12
-
+    // cout <<  << endl; // clearing last two bits 1111  ->1100 i.e. 15 to 12
+    all_subset("1234");
     // cout<<(n>>31);
     // cout<<(~0);
     return 0;

@@ -39,10 +39,10 @@ int replaceBits(int n,int m,int i,int j){
 int decimalToBinary(int n){
     int ans=0,p=1;
     while (n){
-        // cout<<(n&1)<<" "; //will give in reverse order
-        int lastBit=(n&1);
-        ans+=p*lastBit;
-        p=p*10;
+        cout<<(n&1); //will give in reverse order
+        // int lastBit=(n&1);
+        // ans+=p*lastBit;
+        // p=p*10;
         n=n>>1;
     }
    return ans; 
@@ -59,7 +59,8 @@ int32_t main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
 // int n=gen<int>();
-cout<<decimalToBinary(16);
-
+int N;
+// cin>>N;
+cout<<decimalToBinary(7);
 return 0;
 }

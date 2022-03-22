@@ -5,7 +5,11 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 int main()
 {
-
+    srand(time(0));
+    cout <<"How Much test  Case:";
+    int noa;
+    cin >> noa;
+    cin.get();
     long long l, u, n;
     char sorted, unique, seperator;
     cout << "Enter y/n for sorted, y/n for unique, seperator without space for example:'nn,' \n";
@@ -14,61 +18,67 @@ int main()
     seperator = cin.get();
     cout << "Enter l, u and n\n";
     cin >> l >> u >> n;
-
-    if (sorted == 'n' && unique == 'n')
+    for(int p=0;p<noa;p++)
     {
-        while (n--)
+
+        if (sorted == 'n' && unique == 'n')
         {
-            num = (rand() % (u - l + 1)) + l;
-            cout << num;
-            if (n)
+            int z=n;
+            while (z--)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                cout << num;
+                if (n)
+                    putchar(seperator);
+            }
+        }
+        else if (unique == 'y' && sorted == 'n')
+        {
+            unordered_set<long long> s;
+            int z=n;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.insert(num);
+            }
+            z -= 1;
+            for (auto x : s)
+            {
+                cout << x;
                 putchar(seperator);
+            }
         }
+        else if (unique == 'y' && sorted == 'y')
+        {
+            set<long long> s;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.insert(num);
+            }
+            for (auto x : s)
+            {
+                cout << x;
+                putchar(seperator);
+            }
+        }
+        else
+        {
+            vector<long long> s;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.push_back(num);
+            }
+            sort(all(s));
+            for (auto x : s)
+            {
+                cout << x;
+                putchar(seperator);
+            }
+            cout << endl;
+        }
+        cout<<endl;
     }
-    else if (unique == 'y' && sorted == 'n')
-    {
-        unordered_set<long long> s;
-        while (s.size() != n)
-        {
-            num = (rand() % (u - l + 1)) + l;
-            s.insert(num);
-        }
-        n -= 1;
-        for (auto x : s)
-        {
-            cout << x;
-            putchar(seperator);
-        }
-    }
-    else if (unique == 'y' && sorted == 'y')
-    {
-        set<long long> s;
-        while (s.size() != n)
-        {
-            num = (rand() % (u - l + 1)) + l;
-            s.insert(num);
-        }
-        for (auto x : s)
-        {
-            cout << x;
-            putchar(seperator);
-        }
-    }
-    else
-    {
-        vector<long long> s;
-        while (s.size() != n)
-        {
-            num = (rand() % (u - l + 1)) + l;
-            s.push_back(num);
-        }
-        sort(all(s));
-        for (auto x : s)
-        {
-            cout << x;
-            putchar(seperator);
-        }
-    }
-
     return 0;
 }
