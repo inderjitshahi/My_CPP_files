@@ -1,17 +1,57 @@
-//Calculating Execution Time for a program
+// Calculating Execution Time for a program
 
 #include <bits/stdc++.h>
 using namespace std;
 using namespace chrono;
+
 void fun()
 {
-    long long iterations = 100000000000, sum = 0, add = 0;
-    for (int i = 0; i < iterations; i++)
+    map<int, int> res;
+    int target=10;
+    vector<int>nums={3,3,5,64,544,343,42,33,434,54,5,5,56,56,6,6,76,65,6,55,45,45,4};
+    for (int i = 0; i < nums.size(); i++)
     {
-        sum = (sum + add) % 100;
-        add /= 2.0;
+        if (res.count(target - nums[i]))
+        {
+            cout<<res[target - nums[i]];
+            cout<<","<<i;
+           \
+        }
+        else
+            res[nums[i]] = i;
     }
+    return;
 }
+void fun2()
+{
+    map<int, int> res;
+    int target=10;
+    vector<int>nums={3,3,5,64,544,343,42,33,434,54,5,5,56,56,6,6,76,65,6,55,45,45,4};
+    map<int ,int> m;
+    map<int ,int> dm;
+        for(int i=0;i<nums.size();i++){
+            if(m[nums[i]]!=0) dm[nums[i]]=i+1;
+            else m[nums[i]]=i+1;
+        }
+        
+        for(auto x:m){
+            if(m[target-x.first]!=0){
+                if((target-x.first)==x.first){
+                  cout<<x.second-1;
+                  cout<<dm[x.first]-1;
+                    break;
+                }
+              else {
+                cout<<(x.second-1);
+                cout<<(m[target-x.first]-1);
+                break;
+            }
+          } 
+            
+        }
+        return;
+}
+
 int main()
 {
     // Start measuring time
@@ -23,15 +63,14 @@ int main()
     // Stop measuring time and calculate the elapsed time
     auto end = high_resolution_clock::now();
     auto elapsed = duration_cast<nanoseconds>(end - begin);
-    printf("Time measured: %.7f seconds.\n", elapsed.count() * 1e-9);
+    printf("\nTime measured: %.7f seconds.\n", elapsed.count() * 1e-9);
 
     return 0;
 }
 
-
-//Another Approach using time.h, but measures only seconds
-// #include <bits/stdc++.h>
-// using namespace std;
+// Another Approach using time.h, but measures only seconds
+//  #include <bits/stdc++.h>
+//  using namespace std;
 
 // // A sample function whose time taken to
 // // be measured
