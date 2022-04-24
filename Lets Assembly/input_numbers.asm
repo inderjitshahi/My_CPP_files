@@ -8,8 +8,10 @@ main proc
  mov ah,1
  int 21h
 mov bl,al  ;saving the value of al to bl
-mov al,1
+
+mov ah,1
 int 21h
+
 add bl,al  
 sub bl,48 
 mov dl,bl

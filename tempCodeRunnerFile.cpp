@@ -1,78 +1,84 @@
-//Calculating Execution Time for a program
+// This Program is written for generation  of data for using as a test case in various DSA problems etc. or using generated data in ML related Projects
 
 #include <bits/stdc++.h>
 using namespace std;
-using namespace chrono;
-void fun()
-{
-    long long iterations = 100000000000, sum = 0, add = 0;
-    for (int i = 0; i < iterations; i++)
-    {
-        sum = (sum + add) % 100;
-        add /= 2.0;
-    }
-}
+#define all(x) x.begin(), x.end()
 int main()
 {
-    // Start measuring time
-    auto begin = high_resolution_clock::now();
+    srand(time(0));
+    cout <<"How Much test  Case:";
+    int noa;
+    cin >> noa;
+    cin.get();
+    long long l, u, n;
+    char sorted, unique, seperator;
+    cout << "Enter y/n for sorted, y/n for unique, seperator without space for example:'nn,' \n";
+    long long num;
+    cin >> sorted >> unique;
+    seperator = cin.get();
+    cout << "Enter l, u and n\n";
+    cin >> l >> u >> n;
+    for(int p=0;p<noa;p++)
+    {
 
-    // function execution
-    fun();
-
-    // Stop measuring time and calculate the elapsed time
-    auto end = high_resolution_clock::now();
-    auto elapsed = duration_cast<nanoseconds>(end - begin);
-    printf("Time measured: %.7f seconds.\n", elapsed.count() * 1e-9);
-
+        if (sorted == 'n' && unique == 'n')
+        {
+            int z=n;
+            while (z--)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                cout << num;
+                if (n)
+                    putchar(seperator);
+            }
+        }
+        else if (unique == 'y' && sorted == 'n')
+        {
+            unordered_set<long long> s;
+            int z=n;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.insert(num);
+            }
+            z -= 1;
+            for (auto x : s)
+            {
+                cout << x;
+                putchar(seperator);
+            }
+        }
+        else if (unique == 'y' && sorted == 'y')
+        {
+            set<long long> s;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.insert(num);
+            }
+            for (auto x : s)
+            {
+                cout << x;
+                putchar(seperator);
+            }
+        }
+        else
+        {
+            vector<long long> s;
+            while (s.size() != n)
+            {
+                num = (rand() % (u - l + 1)) + l;
+                s.push_back(num);
+            }
+            sort(all(s));
+            for (auto x : s)
+            {
+                cout << x;
+                putchar(seperator);
+            }
+            cout << endl;
+        }
+        cout<<endl;
+    }
     return 0;
 }
-
-
-//Another Approach using time.h, but measures only seconds
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// // A sample function whose time taken to
-// // be measured
-// vector<int> del;
-// void fun()
-// {
-// 	for (int i=0; i<1000000; i++)
-// 	{
-//         del.push_back(i);
-//         sort(del.begin(),del.end());
-// 	}
-// 	for (int i=0; i<10000; i++)
-// 	{
-//         del.pop_back();
-//         // sort(del.begin(),del.end());
-// 	}
-// }
-
-// int main()
-// {
-// 	/* Time function returns the time since the
-// 		Epoch(jan 1 1970). Returned time is in seconds. */
-// 	time_t start, end;
-
-// 	/* You can call it like this : start = time(NULL);
-// 	in both the way start contain total time in seconds
-// 	since the Epoch. */
-// 	time(&start);
-
-// 	// unsync the I/O of C and C++.
-// 	ios_base::sync_with_stdio(false);
-
-// 	fun();
-
-// 	// Recording end time.
-// 	time(&end);
-
-// 	// Calculating total time taken by the program.
-// 	double time_taken = double(end - start);
-// 	cout << "Time taken by program is : " << fixed
-// 		<< time_taken << setprecision(5);
-// 	cout << " sec " << endl;
-// 	return 0;
-// }

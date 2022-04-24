@@ -6,7 +6,7 @@ dosseg
 
 .code    ;code segment 
 main proc
- mov dl,'a' ;sending character 'a' to data register
+ mov dx,'a' ;sending character 'a' to data register
  mov ah,2   ;asking accumulator to print
  int 21h    ;halting the program for microprocessor to print a
  mov ah, 4ch ;terminating program

@@ -1,4 +1,4 @@
-;program  to print the charecters
+; program  to print the charecters
 dosseg
 .model small
 .stack 100h
