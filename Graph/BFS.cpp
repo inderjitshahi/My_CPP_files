@@ -30,10 +30,11 @@ using pbds = tree<T, null_type, less<T>, rb_tree_tag,
                   tree_order_statistics_node_update>;
 
 template <class T>
+
 class graph
 {
     int V;             // #vertices
-    map<T, list<T>> l; // hash-map for adjList
+    map<T, list<T>> m; // hash-map for adjList
     // list<int> *l;  //variable array of lists
 
 public:
@@ -44,8 +45,8 @@ public:
 
     void addEdge(T x, T y)
     {
-        l[x].push_back(y); // assuming un-directed graph
-        l[y].push_back(x);
+        m[x].push_back(y); // assuming un-directed graph
+        m[y].push_back(x);
     }
     void bfs(T src)
     {
@@ -58,7 +59,7 @@ public:
             T node = q.front();
             q.pop();
             cout << node << " ";
-            for (auto nbr : l[node]) // visiting all the nbr of present node
+            for (auto nbr : m[node]) // visiting all the nbr of present node
             {
                 if (!visited[nbr]) // if neighbour is not visited
                 {
@@ -74,7 +75,7 @@ public:
         queue<T> q;       // queue for BFS
 
         // Assume all  nodes have distanece int_max
-        for (auto node_pair : l)
+        for (auto node_pair : m)
         {                             // visiting every node of AdyList
             T node = node_pair.first; // node_pair= map<T,list<T>>;
             dist[node] = INT_MAX;
@@ -87,7 +88,7 @@ public:
             T node = q.front();
             q.pop();
             // cout << node << " ";
-            for (auto nbr : l[node]) // visiting all the nbr of present node
+            for (auto nbr : m[node]) // visiting all the nbr of present node
             {
                 if (dist[nbr] == INT_MAX) // if neighbour is not visited
                 {
@@ -96,7 +97,7 @@ public:
                 }
             }
         }
-        for (auto node_pair : l)
+        for (auto node_pair : m)
         {
             T node = node_pair.first;
             int d = dist[node];
@@ -105,7 +106,7 @@ public:
     }
     void printAdjList()
     {
-        for (auto p : l)
+        for (auto p : m)
         {
             T city = p.first;
             list<T> nbrs = p.second;

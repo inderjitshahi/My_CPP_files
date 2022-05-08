@@ -9,7 +9,7 @@ template <class T>
 class graph
 {
     int V;
-    map<T, list<T>> l;
+    map<T, list<T>> m;
 
 public:
     graph(int V)
@@ -19,14 +19,14 @@ public:
 
     void addEdge(T x, T y)
     {
-        l[x].push_back(y); // directed graph
+        m[x].push_back(y); // directed graph
     }
     void singleShortestpath(T src, T dest)
     {
         map<T, int> dist;
         map<T,T>parent;
         queue<T> q;
-        for (auto node_pair : l)
+        for (auto node_pair : m)
         {
             T node = node_pair.first;
             dist[node] = INT_MAX;
@@ -39,7 +39,7 @@ public:
         {
             T node = q.front();
             q.pop();
-            for (auto nbr : l[node])
+            for (auto nbr : m[node])
             {
                 if (dist[nbr] == INT_MAX)
                 {
@@ -63,7 +63,7 @@ public:
 
     void printAdjList()
     {
-        for (auto p : l)
+        for (auto p : m)
         {
             T city = p.first;
             list<T> nbrs = p.second;

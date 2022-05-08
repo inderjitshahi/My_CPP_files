@@ -33,9 +33,8 @@ template <class T>
 class graph
 {
     int V;             // #vertices
-    map<T, list<T>> l; // hash-map for adjList
+    map<T, list<T>> m; // hash-map for adjList
     // list<int> *l;  //variable array of lists
-    int cnt=0;
 public:
     graph(int V)
     {
@@ -44,18 +43,17 @@ public:
 
     void addEdge(T x, T y)
     {
-        l[x].push_back(y); // assuming un-directed graph
-        l[y].push_back(x);
+        m[x].push_back(y); // assuming un-directed graph
+        m[y].push_back(x);
     }
     void dfsHelper(T src, map<T, bool> &visited)
     {
         // Recursive function to traverse the graph
 
         cout<<src<<"\n";
-        cnt++;
         visited[src] = true;
         // go to all next non-visited node
-        for (auto nbr : l[src])
+        for (auto nbr : m[src])
         {
             if (!visited[nbr])
             {
@@ -67,13 +65,13 @@ public:
     {
         map<T, bool> visited;
         // mark all the node non-visited;
-        for (auto p : l)
+        for (auto p : m)
             visited[p.first] = false;
         dfsHelper(src, visited);
     }
     void printAdjList()
     {
-        for (auto p : l)
+        for (auto p : m)
         {
             T city = p.first;
             list<T> nbrs = p.second;
@@ -89,11 +87,11 @@ public:
     {
         map<T, bool> visited;
         // mark all the node non-visited;
-        for (auto p : l)
+        for (auto p : m)
             visited[p.first] = false;
         // itereate over all the vertices and init a dfs
         int count=1;
-        for (auto p : l)
+        for (auto p : m)
         {
             T node = p.first; 
             if (!visited[node])
@@ -102,8 +100,6 @@ public:
                 cout<<"Component "<<count<<" -->\n";
                 dfsHelper(node, visited);
                 count+=1;
-                 cout<<"cnt is :"<<cnt;
-                 cnt=0;
             }
         }
     }

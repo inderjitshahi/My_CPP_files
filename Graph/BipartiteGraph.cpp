@@ -32,10 +32,7 @@ public:
     bool bipartiteHelper(int *visited, int *set, int node, int parent)
     {
 
-        if (set[parent] == 1)
-            set[node] = 2;
-        else
-            set[node] = 1;
+        set[node] = 3-set[parent];
         for (auto nbr : l[node])
         {
             if (set[nbr] == set[node]) // nbr is visited but  not parent, i.e. cycle present
@@ -55,6 +52,7 @@ public:
     void bipartite()
     {
         int set[V] = {0};
+        set[0]=2;
         int visited[V] = {0};
         if (!bipartiteHelper(visited, set, 0, 0))
             cout << "Not Bipartite graph";
@@ -106,8 +104,10 @@ int main()
     g.addEdge(5, 7);
     g.addEdge(6, 8);
     g.addEdge(7, 8);
-    // g.addEdge(2, 0);
+    g.addEdge(2, 0);
     g.print();
+    g.bipartite();
+    cout<<endl;
     int minD=INT_MAX;
     for(int i=0;i<9;i++){
          g.bfs(i,minD);

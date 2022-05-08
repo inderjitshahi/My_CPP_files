@@ -1,14 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class T>
-T gen()
-{
-    T x;
-    cin >> x;
-    return x;
-}
-
 class graph
 {
     int V;        // #vertices
@@ -25,30 +17,36 @@ public:
         l[x].push_back(y); // directed graph
     }
 
-bool cycleHelper(int node, int *visited, int *stack){
-    visited[node]=1;
-    stack[node]=1;
+    bool cycleHelper(int node, int *visited, int *stack)
+    {
+        visited[node] = 1;
+        stack[node] = 1;
 
-    for(auto nbr:l[node]){
-        //two cases
-        if(stack[nbr]==1) return true;
+        for (auto nbr : l[node])
+        {
+            // two cases
+            if (stack[nbr] == 1) // if nbr is present in current path then cycle is present
+                return true;
 
-        if(visited[nbr]==0){
-            bool cycleMila=cycleHelper(nbr,visited,stack);
-            if(cycleMila) return true;
+            else if (visited[nbr] == 0)
+            {
+                bool cycleMila = cycleHelper(nbr, visited, stack);
+                if (cycleMila)
+                    return true;
+            }
         }
+
+        // leaving a node, remove from current path
+        stack[node] = 0;
+        return false;
     }
 
-    //leave a node
-    stack[node]=0;
-    return false;
-}
-
-bool containsCycle(){
-    int visited[V]={0};
-    int stack[V]={0};
-    return cycleHelper(0,visited,stack);
-}
+    bool containsCycle()
+    {
+        int visited[V] = {0};
+        int stack[V] = {0};
+        return cycleHelper(0, visited, stack);
+    }
 
     void printAdjList()
     {
@@ -80,7 +78,9 @@ int32_t main()
     g.printAdjList();
 
     cout << "\nTopological Soting is:\n";
-    if(g.containsCycle()) cout<<"Have Cycle!!";
-    else cout<<"No Cycle!!";
+    if (g.containsCycle())
+        cout << "Have Cycle!!";
+    else
+        cout << "No Cycle!!";
     return 0;
 }
