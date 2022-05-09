@@ -78,7 +78,7 @@ int main()
             }
             cout << endl;
         }
-        cout<<endl;
+        cout<<"\n\n\n";
     }
     return 0;
 }

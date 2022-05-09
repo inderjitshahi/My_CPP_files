@@ -1,86 +1,89 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class T>
-T gen()
+void dfs(vector<int> graph[], int i, int *visited, vector<int> &stack)
 {
-    T x;
-    cin >> x;
-    return x;
-}
-
-class graph
-{
-    int V;        // #vertices
-    list<int> *l; // variable array of lists
-public:
-    graph(int V)
+    visited[i] = 1;
+    for (auto nbr : graph[i])
     {
-        this->V = V;
-        l = new list<int>[V];
-    }
-
-    void addEdge(int x, int y)
-    {
-        l[x].push_back(y); // directed graph
-    }
-
-bool cycleHelper(int node, int *visited, int *stack){
-    visited[node]=1;
-    stack[node]=1;
-
-    for(auto nbr:l[node]){
-        //two cases
-        if(stack[nbr]==1) return true;
-
-        if(visited[nbr]==0){
-            bool cycleMila=cycleHelper(nbr,visited,stack);
-            if(cycleMila) return true;
-        }
-    }
-
-    //leave a node
-    stack[node]=0;
-    return false;
-}
-
-bool containsCycle(){
-    int visited[V]={0};
-    int stack[V]={0};
-    return cycleHelper(0,visited,stack);
-}
-
-    void printAdjList()
-    {
-        for (int i = 0; i < V; i++)
+        if (visited[nbr] == 0)
         {
-            cout << "node " << i << "-> ";
-            for (auto x : l[i])
-            {
-                cout << "(" << (x) << ") ";
-            }
-            cout << "\n";
+            dfs(graph, nbr, visited, stack);
         }
     }
-};
-
-int32_t main()
+    stack.push_back(i);
+    return;
+}
+void dfs2(vector<int> rev_graph[], int i, int *visited2)
 {
-    graph g(7);
-    g.addEdge(0, 1);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(3, 4);
-    g.addEdge(4, 5);
-    g.addEdge(1, 5);
-    g.addEdge(5, 6);
-    g.addEdge(4, 2);
+    visited2[i] = 1;
+    cout << i << " ";
+    for (auto nbr : rev_graph[i])
+    {
+        if (visited2[nbr] == 0)
+        {
+            dfs2(rev_graph, nbr, visited2);
+        }
+    }
+}
 
-    cout << "The AdjList: \n";
-    g.printAdjList();
+void solve(vector<int> graph[], vector<int> rev_graph[], int N)
+{
+    int visited[N] = {0};
+    vector<int> stack ;
 
-    cout << "\nTopological Soting is:\n";
-    if(g.containsCycle()) cout<<"Have Cycle!!";
-    else cout<<"No Cycle!!";
+    // step-1 need to store the vertices acc. to dfs fifnish time
+    for (int i = 0; i < N; i++)
+    {
+        if (visited[i] == 0)
+        {
+            dfs(graph, i, visited, stack);
+        }
+    }
+
+    // ordering in  stack vector
+    // step 2-> reverse
+
+    // step-3 -> do dfs acc to ordering given in the stack
+    int visited2[N] = {0};
+    char component_name = 'A';
+    for (int x = stack.size() - 1; x >= 0; x--)
+    {
+        int node = stack[x];
+        if (visited2[node] == 0)
+        {
+            cout << "component " << component_name << "-> ";
+            dfs2(rev_graph, node, visited2);
+            cout << "\n";
+            component_name++;
+        }
+    }
+}
+
+int main()
+{
+
+    int N;
+    cin >> N;
+    vector<int> graph[N]; // graph[0]--> 1,2,
+    vector<int> rev_graph[N];
+
+    int m;
+    cin >> m;
+
+    while (m--)
+    {
+        int x, y;
+        cin >> x >> y;
+        graph[x].push_back(y);
+        rev_graph[y].push_back(x);
+    }
+    for(int i=0;i<N;i++){
+        cout<<"node "<<i<<"-->";
+        for(auto x:graph[i] ) cout<<x<<" ";
+        cout<<endl;
+    }
+    cout<<"\nComponnents:\n";
+    solve(graph, rev_graph, N);
     return 0;
 }

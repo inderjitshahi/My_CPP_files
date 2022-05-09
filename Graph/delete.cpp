@@ -58,15 +58,27 @@ public:
         }
     }
 };
-
+void print(int visited[],int n){
+    for (int i = 0; i < n; i++)
+    {
+        cout<<visited[i]<<" ";
+    }
+    cout<<"\n";
+}
 int main()
 {
-    graph g(6);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(4, 6);
-    g.addEdge(4, 5);
-    g.print();
-    g.connected();
+    // graph g(6);
+    // g.addEdge(1, 2);
+    // g.addEdge(2, 3);
+    // g.addEdge(4, 6);
+    // g.addEdge(4, 5);
+    // g.print();
+    // g.connected();
+    int visited[10]={0};
+    visited[1]=4;
+    visited[5]=29393949;
+    print(visited,10);
+    visited[10]={0};
+    print(visited,10);
     return 0;
 }

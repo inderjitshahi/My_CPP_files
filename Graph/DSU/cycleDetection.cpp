@@ -24,7 +24,7 @@ public:
         //     return i;
         // return findSet(parent[i], parent);
 
-        /*************** Path comlression optimisation  ************/
+        /*************** Path compression optimisation  ************/
 
         if (parent[i] == -1)
             return i;
@@ -32,7 +32,7 @@ public:
     }
 
     // union
-    void UnionSet(int x, int y, int *parent,int *rank)
+    void UnionSet(int x, int y, int *parent, int *rank)
     {
         /*************** Standard Appraoch  ************/
         // int s1 = findSet(x, parent);
@@ -42,28 +42,32 @@ public:
         /*************** Union by rank  ************/
         int s1 = findSet(x, parent);
         int s2 = findSet(y, parent);
-        if (s1 != s2){
-            if(rank[s1]<rank[s2]){
-                parent[s1]=s2;
-                rank[s2]+=rank[s1];
+        if (s1 != s2)
+        {
+
+            // earlier parent[s1]=s2 , directly on every case, but now we will make parent by rank
+            if (rank[s1] < rank[s2])
+            {
+                parent[s1] = s2;
+                rank[s2] += rank[s1];
             }
-            else{
-                 parent[s2]=s1;
-                rank[s1]+=rank[s2];
+            else
+            {
+                parent[s2] = s1;
+                rank[s1] += rank[s2];
             }
         }
-
-
     }
     bool containsCycle()
     {
         // DSU logic to check for cycle
         int parent[V];
-        int *rank=new int[V];
+        int *rank = new int[V];
+        // initializing parent bt -1 and rank by 1
         for (int i = 0; i < V + 1; i++)
         {
             parent[i] = -1;
-            rank[i]=1;
+            rank[i] = 1;
         }
         for (auto edge : edgeList)
         {
@@ -74,7 +78,7 @@ public:
             int s1 = findSet(i, parent);
             int s2 = findSet(j, parent);
             if (s1 != s2)
-                UnionSet(s1, s2, parent,rank);
+                UnionSet(s1, s2, parent, rank);
             else
             {
                 cout << "Same parent: " << s1 << " of ( " << i << " and " << j << " )";

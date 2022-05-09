@@ -18,7 +18,8 @@
     "type_traits": "cpp",
     "iostream": "cpp",
     "cmath": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "*.tcc": "cpp"
   },
   "sqltools.connections": [
     {
